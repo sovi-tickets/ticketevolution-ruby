@@ -15,6 +15,9 @@ module TicketEvolution
     def deliver
       plural_class.new(:parent => @connection, :id => self.id).deliver_shipment
     end
+    def complete
+      plural_class.new(:parent => @connection, :id => self.id).complete_shipment
+    end
     def pend
       plural_class.new(:parent => @connection, :id => self.id).pend_shipment
     end

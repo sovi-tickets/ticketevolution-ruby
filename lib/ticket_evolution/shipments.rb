@@ -81,6 +81,18 @@ module TicketEvolution
       end
     end
 
+    def complete_shipment(params = nil)
+      ensure_id
+
+      request(:GET, "/complete", nil) do |response|
+        singular_class.new(response.body.merge({
+          :status_code => response.response_code,
+          :server_message => response.server_message,
+          :connection => response.body[:connection]
+        }))
+      end
+    end
+
     def suggestion(params, &handler)
       request(:POST, "/suggestion", params, &method(:raw_handler))
     end
